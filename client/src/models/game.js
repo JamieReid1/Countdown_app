@@ -53,8 +53,8 @@ Game.prototype.playCountdown = function(){
 
         words.bindEvents();
         const gameContainer = document.querySelector('#game-container');
-        const player1Word = document.querySelector('#p1-word-display');
-        const player2Word = document.querySelector('#p2-word-display');
+        const player1Word = document.querySelector('#p1-input-display');
+        const player2Word = document.querySelector('#p2-input-display');
         const resultDisplay = document.querySelector('#result-display');
         const bestWordsDisplay = document.querySelector('#best-words');
         gameContainer.innerHTML = '';
@@ -81,8 +81,8 @@ Game.prototype.playCountdown = function(){
         const target = numbers.target;
         numbers.bindEvents();
         const gameContainer = document.querySelector('#game-container');
-        const player1Word = document.querySelector('#p1-word-display');
-        const player2Word = document.querySelector('#p2-word-display');
+        const player1Word = document.querySelector('#p1-input-display');
+        const player2Word = document.querySelector('#p2-input-display');
         const resultDisplay = document.querySelector('#result-display');
         const bestWordsDisplay = document.querySelector('#best-words');
         gameContainer.innerHTML = '';
@@ -104,8 +104,8 @@ Game.prototype.playCountdown = function(){
         console.log(jumble);
 
         const gameContainer = document.querySelector('#game-container');
-        const player1Word = document.querySelector('#p1-word-display');
-        const player2Word = document.querySelector('#p2-word-display');
+        const player1Word = document.querySelector('#p1-input-display');
+        const player2Word = document.querySelector('#p2-input-display');
         const resultDisplay = document.querySelector('#result-display');
         const bestWordsDisplay = document.querySelector('#best-words');
         gameContainer.innerHTML = '';

@@ -238,7 +238,7 @@ body {
   font-size: 3em;
 }
 
-#p1-word-display {
+#p1-input-display {
   grid-area: 6/2/6/2;
   color: #e69900;
   font-size: 2em;
@@ -294,7 +294,7 @@ body {
   font-size: 3em;
 }
 
-#p2-word-display {
+#p2-input-display {
   grid-area: 6/4/6/4;
   color: #e69900;
   font-size: 2em;
