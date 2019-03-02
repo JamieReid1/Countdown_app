@@ -8,6 +8,7 @@ const Numbers = function(){
   this.players = [];
   this.playerScores = [0,0];
   this.round = 0;
+  this.totals = [];
 }
 
 Numbers.prototype.bindEvents = function(){
@@ -16,13 +17,45 @@ Numbers.prototype.bindEvents = function(){
     console.log("HERE - player 1");
     let validity = this.checkSolution(event.detail);
     console.log(validity);
+    if (validity){
+      const p1Total = eval(event.detail);
+      this.totals.unshift(p1Total);
+    } else {
+      this.totals.unshift("INVALID");
+    }
   })
 
   PubSub.subscribe(`NumbersGameView:submitted-solution-p2-${this.round}`,(event)=>{
     console.log("HERE - player 2");
     let validity = this.checkSolution(event.detail);
     console.log(validity);
+    if (validity){
+      const p2Total = eval(event.detail);
+      this.totals.push(p2Total);
+    } else {
+      this.totals.push("INVALID");
+    }
     this.scoreGame();
+    const player1Solution = document.querySelector('#p1-input-display');
+    const player2Solution = document.querySelector('#p2-input-display');
+    if (this.totals[0] === "INVALID"){
+      player1Solution.textContent = `${this.totals[0]} INPUT`;
+    } else if (this.target === this.totals[0]){
+      player1Solution.textContent = this.totals[0];
+    } else if (this.target > this.totals[0]){
+      player1Solution.textContent = `${this.totals[0]}  (-${this.target-this.totals[0]})`;
+    } else if (this.target < this.totals[0]){
+      player1Solution.textContent = `${this.totals[0]}  (+${this.totals[0]-this.target})`;
+    }
+    if (this.totals[1] === "INVALID"){
+      player2Solution.textContent = `${this.totals[1]} INPUT`;
+    } else if (this.target === this.totals[1]){
+      player2Solution.textContent = this.totals[1];
+    } else if (this.target > this.totals[1]){
+      player2Solution.textContent = `${this.totals[1]}  (-${this.target-this.totals[1]})`;
+    } else if (this.target < this.totals[1]){
+      player2Solution.textContent = `${this.totals[1]}  (+${this.totals[1]-this.target})`;
+    }
     PubSub.publish('Words:word1-score',this.playerScores[0]);
     PubSub.publish('Words:word2-score',this.playerScores[1]);
   })
@@ -60,7 +93,7 @@ Numbers.prototype.getNumbers = function() {
 };
 
 Numbers.prototype.getTarget = function(){
-  const randomNumber = Math.floor(Math.random()*900)+100;
+  const randomNumber = Math.floor(Math.random()*500)+100;
   return randomNumber;
 }
 
