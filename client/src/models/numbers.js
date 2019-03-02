@@ -166,7 +166,7 @@ Numbers.prototype.scoreGame = function(){
       else if (player1distance<=5){
         this.playerScores[0] = 7;
       }
-      else if (player1distance<=5) {
+      else if (player1distance<=10) {
         this.playerScores[0] = 5;
       }
       else {
@@ -180,7 +180,7 @@ Numbers.prototype.scoreGame = function(){
       else if (player2distance<=5){
         this.playerScores[1] = 7;
       }
-      else if (player2distance<=5) {
+      else if (player2distance<=10) {
         this.playerScores[1] = 5;
       }
       else {
