@@ -3,19 +3,19 @@ db.dropDatabase();
 
 db.leaderBoard.insertMany([
   {
-    name: "Kirsty",
-    score: 1,
+    name: "Andrew M",
+    score: 10,
   },
   {
-    name: "Shabs",
-    score: 2,
+    name: "Jamie R",
+    score: 10,
   },
   {
-    name: "Jamie",
-    score: 3,
+    name: "Kirsty L",
+    score: 10,
   },
   {
-    name: "Andrew",
-    score: 4,
+    name: "Shabs M",
+    score: 10,
   }
 ]);

@@ -13,7 +13,7 @@ const Player1 = function(name) {
 Player1.prototype.bindEvents = function () {
   PubSub.subscribe('Player1InputFormView:submitted-player', (evt) => {
     const player1 = this.createPlayer1(evt);
-    this.addPlayer(player1);
+    // this.addPlayer(player1);
     PubSub.publish('Player1:player-1', player1);
   });
   PubSub.subscribe('Words:word1-score', (evt) => {
@@ -32,28 +32,21 @@ Player1.prototype.createPlayer1 = function (evt) {
   return player1;
 };
 
-// Creates a new player from the player2 name input with an initial score of 0
-// but does not add the player to the db.
-
-// If the new player is not already in the db then the new player is added to
-// the db. If the new player is already in the db then the existing player is
-// not overwritten. We can change the console.log() to update a text element
-// with the 'That player already exists!' message.
-Player1.prototype.addPlayer = function (newPlayer) {
-  this.request
-    .get()
-    .then((players) => {
-      const names = players.map(player => player.name);
-      if (names.includes(newPlayer.name)) {
-        console.log('That player already exists!');
-      } else {
-        this.request
-          .post(newPlayer)
-          .catch((err) => console.error(err));
-      }
-    })
-    .catch((err) => console.error(err));
-};
+// Player1.prototype.addPlayer = function (newPlayer) {
+//   this.request
+//     .get()
+//     .then((players) => {
+//       const names = players.map(player => player.name);
+//       if (names.includes(newPlayer.name)) {
+//         console.log('That player already exists!');
+//       } else {
+//         this.request
+//           .post(newPlayer)
+//           .catch((err) => console.error(err));
+//       }
+//     })
+//     .catch((err) => console.error(err));
+// };
 
 // Player1.prototype.updateScore = function () {
 //   const player1Score = document.querySelector('#player1-score');
