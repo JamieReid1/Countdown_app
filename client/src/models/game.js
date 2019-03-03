@@ -23,7 +23,7 @@ Game.prototype.playCountdown = function(){
   // const conundrum = new Conundrum();
 
 
-  const rounds = ["N","N","N","N","N","N","N","E"];
+  const rounds = ["L","L","N","L","L","N","L","L","C","E"];
 
 
 

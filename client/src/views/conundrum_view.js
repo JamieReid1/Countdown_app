@@ -97,10 +97,6 @@ ConundrumGameView.prototype.setupEventListener = function () {
         console.log(form);
         word1 = form.word.value;
         PubSub.publish(`Conundrum:submitted-word-p1`, word1);
-
-        let p1Button = document.querySelector('#p1')
-        p1Button.disabled = true;
-        
       });
       // this.element2.addEventListener('submit', function(event) {
 
@@ -110,12 +106,7 @@ ConundrumGameView.prototype.setupEventListener = function () {
         event.preventDefault();
         const form = event.target.form;
         word2 = form.word.value;
-
         PubSub.publish(`Conundrum:submitted-word-p2`, word2);
-
-        let p2Button = document.querySelector('#p2')
-        p2Button.disabled = true;
-
       });
 
 };

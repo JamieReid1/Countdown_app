@@ -197,35 +197,98 @@ Words.prototype.getConundrum = function () {
 }
 
 Words.prototype.bindConundrumEvents = function (){
+  const resultDisplay = document.querySelector('#result-display');
+  const resultH3 = document.createElement('h3');
+  const winner = document.querySelector('#best-words');
 
   PubSub.subscribe('Conundrum:submitted-word-p1', (event) =>{
+    const conundrumForm = document.querySelector('#p-word-submit');
+    const startButton = document.querySelector('#start-button');
+    const p1Score = document.querySelector('#player1-score');
+    const p2Score = document.querySelector('#player2-score');
+    console.dir(startButton);
     if (event.detail===this.conundrum){
       PubSub.publish('Words:word1-score',10)
-
-      this.conundrum.split('').forEach( (letter,index) => {
-      const letterTile = document.querySelector(`#letter${index+1}`)
-      letterTile.childNodes[0].textContent = letter.toUpperCase();
-      });
-
-
-
+      resultH3.textContent = "Correct! 10 points to Player 1";
+      // if (p1Score.textContent > p2Score.textContent){
+      //   winner.textContent = "CONGRATULATIONS PLAYER 1, YOU WIN!"
+      // } else if (p1Score.textContent < p2Score.textContent){
+      //   winner.textContent = "CONGRATULATIONS PLAYER 2, YOU WIN!";
+      // } else {
+      //   winner.textContent = "GAME IS A Draw";
+      // }
+      conundrumForm.innerHTML = "";
+      this.revealConundrum();
+      startButton.textContent = "End Game";
     } else {
       PubSub.publish('Words:word1-score',0)
+      conundrumForm.word.value = "";
+      conundrumForm.p1.disabled = true;
+      resultH3.textContent = "Incorrect! Player 2 turn";
+      if (conundrumForm.p2.disabled === true){
+        resultH3.textContent = `Incorrect! The word is:`;
+        this.revealConundrum();
+        conundrumForm.innerHTML = "";
+        startButton.textContent = "End Game";
+        // if (p1Score.textContent > p2Score.textContent){
+        //   winner.textContent = "CONGRATULATIONS PLAYER 1, YOU WIN!"
+        // } else if (p1Score.textContent < p2Score.textContent){
+        //   winner.textContent = "CONGRATULATIONS PLAYER 2, YOU WIN!";
+        // } else {
+        //   winner.textContent = "GAME IS A Draw";
+        // }
+      }
     }
+    resultDisplay.appendChild(resultH3);
   })
 
   PubSub.subscribe('Conundrum:submitted-word-p2', (event) =>{
+    const conundrumForm = document.querySelector('#p-word-submit');
+    const startButton = document.querySelector('#start-button');
+    const p1Score = document.querySelector('#player1-score');
+    const p2Score = document.querySelector('#player2-score');
     if (event.detail===this.conundrum){
       PubSub.publish('Words:word2-score',10)
-      this.conundrum.split('').forEach( (letter,index) => {
-      const letterTile = document.querySelector(`#letter${index+1}`)
-      letterTile.childNodes[0].textContent = letter.toUpperCase();
-      });
+      resultH3.textContent = "Correct! 10 points to Player 2";
+      // if (p2Score.textContent > p1Score.textContent){
+      //   winner.textContent = "CONGRATULATIONS PLAYER 2, YOU WIN!"
+      // } else if (p2Score.textContent < p1Score.textContent){
+      //   winner.textContent = "CONGRATULATIONS PLAYER 1, YOU WIN!";
+      // } else {
+      //   winner.textContent = "GAME IS A Draw";
+      // }
+      conundrumForm.innerHTML = "";
+      this.revealConundrum();
+      startButton.textContent = "End Game";
     } else {
       PubSub.publish('Words:word2-score',0)
+      conundrumForm.word.value = "";
+      conundrumForm.p2.disabled = true;
+      resultH3.textContent = "Incorrect! Player 1 turn";
+      if (conundrumForm.p1.disabled === true){
+        resultH3.textContent = `Incorrect! The word is:`;
+        this.revealConundrum();
+        conundrumForm.innerHTML = "";
+        startButton.textContent = "End Game";
+        // if (p1Score.textContent > p2Score.textContent){
+        //   winner.textContent = "CONGRATULATIONS PLAYER 1, YOU WIN!"
+        // } else if (p1Score.textContent < p2Score.textContent){
+        //   winner.textContent = "CONGRATULATIONS PLAYER 2, YOU WIN!";
+        // } else {
+        //   winner.textContent = "GAME IS A Draw";
+        // }
+      }
     }
+    resultDisplay.appendChild(resultH3);
   })
 }
+
+Words.prototype.revealConundrum = function(){
+  this.conundrum.split('').forEach( (letter,index) => {
+    const letterTile = document.querySelector(`#letter${index+1}`)
+    letterTile.childNodes[0].textContent = letter.toUpperCase();
+  });
+};
 
 
 Words.prototype.loadWords = function(){
