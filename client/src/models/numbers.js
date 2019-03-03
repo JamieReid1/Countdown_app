@@ -56,10 +56,12 @@ Numbers.prototype.bindEvents = function(){
     } else if (this.target < this.totals[1]){
       player2Solution.textContent = `${this.totals[1]}  (+${this.totals[1]-this.target})`;
     }
+    const resultDisplay = document.querySelector('#result-display');
+    resultDisplay.appendChild(this.displayWinner());
+
     PubSub.publish('Words:word1-score',this.playerScores[0]);
     PubSub.publish('Words:word2-score',this.playerScores[1]);
   })
-
 }
 
 Numbers.prototype.getRandomNumbers = function() {
@@ -203,6 +205,28 @@ Numbers.prototype.scoreGame = function(){
           this.playerScores[0] = 0;
           this.playerScores[1] = 0;
         }
+    }
+
+    Numbers.prototype.displayWinner = function(){
+      const resultH3 = document.createElement('h3');
+      if ((this.totals[0] === "INVALID") && (this.totals[1] === "INVALID")){
+        resultH3.textContent = `Round is a Draw - 0 Points`;
+      } else if ((this.playerScores[0] === this.playerScores[1])){
+        resultH3.textContent = `Round is a Draw - ${this.playerScores[0]} Points`;
+      } else if ((this.playerScores[0] > this.playerScores[1])){
+        resultH3.textContent = `Player 1 wins: ${this.playerScores[0]} Points`;
+      } else if ((this.playerScores[0] < this.playerScores[1])){
+        resultH3.textContent = `Player 2 wins: ${this.playerScores[1]} Points`;
+      } else if ((this.totals[0] === "INVALID") && (this.playerScores[1] > 0)){
+        resultH3.textContent = `Player 2 wins: ${this.playerScores[1]} Points`;
+      } else if ((this.totals[1] === "INVALID") && (this.playerScores[0] > 0)){
+        resultH3.textContent = `Player 1 wins: ${this.playerScores[0]} Points`;
+      } else if ((this.totals[0] === "INVALID") && (this.playerScores[1] === 0)){
+        resultH3.textContent = `Round is a Draw - 0 Points`;
+      } else if ((this.totals[1] === "INVALID") && (this.playerScores[0] === 0)){
+        resultH3.textContent = `Round is a Draw - 0 Points`;
+      }
+      return resultH3;
     }
 
   }

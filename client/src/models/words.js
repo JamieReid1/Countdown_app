@@ -82,7 +82,7 @@ Words.prototype.bindEvents = function(){
     } else if (winner == 'player2') {
       resultH3.textContent = `Player 2 Wins`;
     } else if (winner == 'draw-score') {
-      resultH3.textContent = `Game is a Draw`;
+      resultH3.textContent = `Round is a Draw`;
     }
     resultDisplay.appendChild(resultH3);
 
